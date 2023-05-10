@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace CLINICAL.Application.UseCase.Extensions
@@ -9,7 +8,7 @@ namespace CLINICAL.Application.UseCase.Extensions
         public static IServiceCollection AddInjectionApplication(this IServiceCollection services)
         {
 
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddMediatR( x => x.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             return services;
         }
