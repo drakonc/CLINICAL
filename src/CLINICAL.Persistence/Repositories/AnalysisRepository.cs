@@ -55,5 +55,15 @@ namespace CLINICAL.Persistence.Repositories
             var requestAffected = await connection.ExecuteAsync(query, param: parameters, commandType: CommandType.StoredProcedure);
             return requestAffected > 0;
         }
+
+        public async Task<bool> AnalysisRemove(int analysisId)
+        {
+            using var connection = _context.CreateConnection;
+            var query = "uspAnalysisRemove";
+            var parameters = new DynamicParameters();
+            parameters.Add("AnalysisId", analysisId);
+            var requestAffected = await connection.ExecuteAsync(query, param: parameters, commandType: CommandType.StoredProcedure);
+            return requestAffected > 0;
+        }
     }
 }

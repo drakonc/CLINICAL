@@ -1,13 +1,12 @@
-﻿using CLINICAL.Application.UseCase.Commons.Bases;
-using CLINICAL.Application.UseCase.UseCase.Analysis.Commands.CreateCommand;
-using CLINICAL.Application.UseCase.UseCase.Analysis.Commands.UpdateCommand;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using CLINICAL.Application.UseCase.Commons.Bases;
 using CLINICAL.Application.UseCase.UseCase.Analysis.Queries.GetAllQuery;
 using CLINICAL.Application.UseCase.UseCase.Analysis.Queries.GetByIdQuery;
+using CLINICAL.Application.UseCase.UseCase.Analysis.Commands.CreateCommand;
+using CLINICAL.Application.UseCase.UseCase.Analysis.Commands.DeleteCommand;
+using CLINICAL.Application.UseCase.UseCase.Analysis.Commands.UpdateCommand;
 using CLINICAL.Domain.Entities;
-using FluentValidation.Results;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CLINICAL.Api.Controllers
 {
@@ -73,6 +72,13 @@ namespace CLINICAL.Api.Controllers
                 return Ok(respuesta);
             }
             respuesta = await _medietor.Send(command);
+            return Ok(respuesta);
+        }
+
+        [HttpDelete("Remove/{analysisId:int}")]
+        public async Task<IActionResult> DeleteAnalysis(int analysisId)
+        {
+            var respuesta = await _medietor.Send(new DeleteAnalysisCommand() { AnalysisId = analysisId });
             return Ok(respuesta);
         }
     }

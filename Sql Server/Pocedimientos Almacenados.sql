@@ -1,4 +1,3 @@
---EXEC uspAnalysisList
 CREATE or ALTER PROCEDURE uspAnalysisList
 AS
 BEGIN
@@ -7,7 +6,6 @@ BEGIN
 END
 GO
 
---EXEC uspAnalysisById 1 
 CREATE or ALTER  PROCEDURE uspAnalysisById
 	@AnalysisId INT
 AS
@@ -24,8 +22,24 @@ CREATE or ALTER PROCEDURE uspAnalysisRegister
 	@AuditCreateDate DATETIME
 AS
 BEGIN
-	SET NOCOUNT ON;
 	INSERT INTO Analysis (Name,State,AuditCreateDate)
 	VALUES (@Name,@State,@AuditCreateDate);
 END
 
+CREATE or ALTER PROCEDURE uspAnalysisEdid
+	@AnalysisId int,
+	@Name VARCHAR(100)
+AS
+BEGIN
+	UPDATE Analysis
+	SET Name = @Name
+	WHERE AnalysisId = @AnalysisId
+END
+
+CREATE or ALTER PROCEDURE uspAnalysisRemove
+	@AnalysisId int
+AS
+BEGIN
+	DELETE Analysis
+	WHERE AnalysisId = @AnalysisId
+END
