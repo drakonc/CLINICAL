@@ -19,8 +19,4 @@
     <ProjectReference Include="..\CLINICAL.Domain\CLINICAL.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="UseCase\Analysis\Commands\" />
-  </ItemGroup>
-
 </Project>
