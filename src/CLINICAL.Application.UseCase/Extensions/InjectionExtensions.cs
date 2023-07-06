@@ -1,4 +1,6 @@
-﻿using FluentValidation;
+﻿using CLINICAL.Application.UseCase.Commons.Behaviours;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -12,6 +14,7 @@ namespace CLINICAL.Application.UseCase.Extensions
             services.AddMediatR( x => x.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationsBehaviours<,>));
             return services;
         }
     }

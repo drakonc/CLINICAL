@@ -15,14 +15,10 @@ namespace CLINICAL.Api.Controllers
     public class AnalysisController : ControllerBase
     {
         private readonly IMediator _medietor;
-        private readonly CreateAnalysisValidator _createValidate;
-        private readonly UpdateAnalysisValidator _updateValidate;
 
-        public AnalysisController(IMediator medietor, CreateAnalysisValidator createValidate, UpdateAnalysisValidator updateValidate)
+        public AnalysisController(IMediator medietor)
         {
             _medietor = medietor;
-            _createValidate = createValidate;
-            _updateValidate = updateValidate;
         }
 
         [HttpGet]
@@ -42,36 +38,14 @@ namespace CLINICAL.Api.Controllers
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterAnalysis([FromBody] CreateAnalysisCommand command)
         {
-            var validar = await _createValidate.ValidateAsync(command);
-            var respuesta = new BaseResponse<bool>();
-            if (!validar.IsValid)
-            {
-                List<BaseError> errors = new List<BaseError>();
-                validar.Errors.ForEach(x => errors.Add(new BaseError() { PropertyName = x.PropertyName, ErrorMessage = x.ErrorMessage }));
-                respuesta.Erros = errors;
-                respuesta.IsSuccess = false;
-                respuesta.Message = "Error de validaciones";
-                return Ok(respuesta);
-            }
-            respuesta = await _medietor.Send(command);
+            var respuesta = await _medietor.Send(command);
             return Ok(respuesta);
         }
 
         [HttpPut("Edit")]
         public async Task<IActionResult> EditAnalysis([FromBody] UpdateAnalysisCommand command)
         {
-            var validar = await _updateValidate.ValidateAsync(command);
-            var respuesta = new BaseResponse<bool>();
-            if (!validar.IsValid)
-            {
-                List<BaseError> errors = new List<BaseError>();
-                validar.Errors.ForEach(x => errors.Add(new BaseError() { PropertyName = x.PropertyName, ErrorMessage = x.ErrorMessage }));
-                respuesta.Erros = errors;
-                respuesta.IsSuccess = false;
-                respuesta.Message = "Error de validaciones";
-                return Ok(respuesta);
-            }
-            respuesta = await _medietor.Send(command);
+            var respuesta = await _medietor.Send(command);
             return Ok(respuesta);
         }
 

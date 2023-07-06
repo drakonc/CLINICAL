@@ -1,3 +1,5 @@
+CREATE DATABASE CLINICAL
+
 CREATE TABLE Analysis (
 	AnalysisId int identity(1,1) primary key not null,
 	Name varchar(50),
