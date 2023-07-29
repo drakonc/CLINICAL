@@ -1,4 +1,4 @@
-﻿using CLINICAL.Application.Interface;
+﻿using CLINICAL.Application.Interface.Interfaces;
 using CLINICAL.Domain.Entities;
 using CLINICAL.Persistence.Context;
 using Dapper;

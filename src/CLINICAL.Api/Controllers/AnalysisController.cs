@@ -1,12 +1,10 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using CLINICAL.Application.UseCase.Commons.Bases;
-using CLINICAL.Application.UseCase.UseCase.Analysis.Queries.GetAllQuery;
-using CLINICAL.Application.UseCase.UseCase.Analysis.Queries.GetByIdQuery;
-using CLINICAL.Application.UseCase.UseCase.Analysis.Commands.CreateCommand;
+﻿using CLINICAL.Application.UseCase.UseCase.Analysis.Commands.CreateCommand;
 using CLINICAL.Application.UseCase.UseCase.Analysis.Commands.DeleteCommand;
 using CLINICAL.Application.UseCase.UseCase.Analysis.Commands.UpdateCommand;
-using CLINICAL.Domain.Entities;
+using CLINICAL.Application.UseCase.UseCase.Analysis.Queries.GetAllQuery;
+using CLINICAL.Application.UseCase.UseCase.Analysis.Queries.GetByIdQuery;
+using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CLINICAL.Api.Controllers
 {
