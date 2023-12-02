@@ -6,39 +6,37 @@ using CLINICAL.Utilities.HelperExtensions;
 using MediatR;
 using Entity = CLINICAL.Domain.Entities;
 
-namespace CLINICAL.Application.UseCase.UseCase.Analysis.Commands.CreateCommand
+namespace CLINICAL.Application.UseCase.UseCase.Exam.Commands.CreateCommand
 {
-    public class CreateAnalysisHandler : IRequestHandler<CreateAnalysisCommand, BaseResponse<bool>>
+    internal class CreateExamHandler : IRequestHandler<CreateExamCommand, BaseResponse<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CreateAnalysisHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public CreateExamHandler(IMapper mapper, IUnitOfWork unitOfWork)
         {
-            _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _unitOfWork = unitOfWork;
         }
 
-        public async Task<BaseResponse<bool>> Handle(CreateAnalysisCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<bool>> Handle(CreateExamCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseResponse<bool>();
             try
             {
-                var analysis = _mapper.Map<Entity.Analysis>(request);
-                var parameters = analysis.GetPropertiesWhithValues();
-                response.Data = await _unitOfWork.Analysis.ExecAsync(SP.uspAnalysisRegister, parameters);
+                var exam = _mapper.Map<Entity.Exam>(request);
+                var parameters = exam.GetPropertiesWhithValues();
+                response.Data = await _unitOfWork.Exam.ExecAsync(SP.uspExamRegister, parameters);
                 if (response.Data)
                 {
                     response.IsSuccess = true;
                     response.Message = GlobalMessages.MESSAGE_SAVE;
                 }
-
             }
             catch (Exception ex)
             {
                 response.Message = ex.Message;
             }
-
             return response;
         }
     }
