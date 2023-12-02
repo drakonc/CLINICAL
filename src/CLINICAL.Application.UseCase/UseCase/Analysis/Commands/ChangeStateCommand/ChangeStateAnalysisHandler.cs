@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿    using AutoMapper;
 using CLINICAL.Application.Interface.Interfaces;
 using CLINICAL.Application.UseCase.Commons.Bases;
 using Entity = CLINICAL.Domain.Entities;

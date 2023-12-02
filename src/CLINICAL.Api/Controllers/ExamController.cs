@@ -1,4 +1,6 @@
-﻿using CLINICAL.Application.UseCase.UseCase.Exam.Commands.CreateCommand;
+﻿using CLINICAL.Application.UseCase.UseCase.Exam.Commands.ChangeStateCommand;
+using CLINICAL.Application.UseCase.UseCase.Exam.Commands.CreateCommand;
+using CLINICAL.Application.UseCase.UseCase.Exam.Commands.DeleteCommand;
 using CLINICAL.Application.UseCase.UseCase.Exam.Commands.UpdateCommand;
 using CLINICAL.Application.UseCase.UseCase.Exam.Queries.GetAllQuery;
 using CLINICAL.Application.UseCase.UseCase.Exam.Queries.GetByIdQuery;
@@ -46,5 +48,18 @@ namespace CLINICAL.Api.Controllers
             return Ok(response);
         }
 
+        [HttpDelete("Remove/{examId:int}")]
+        public async Task<IActionResult> DeleteExam(int examId)
+        {
+            var response = await _medietor.Send(new DeleteExamCommand() { ExamId = examId });
+            return Ok(response);
+        }
+
+        [HttpPut("ChangeState")]
+        public async Task<IActionResult> ChangeState([FromBody] ChangeStateExamCommand command)
+        {
+            var response = await _medietor.Send(command);
+            return Ok(response);
+        }
     }
 }
