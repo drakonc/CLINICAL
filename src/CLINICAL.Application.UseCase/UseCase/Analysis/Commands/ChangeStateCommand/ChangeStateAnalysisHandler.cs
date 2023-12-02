@@ -34,6 +34,7 @@ namespace CLINICAL.Application.UseCase.UseCase.Analysis.Commands.ChangeStateComm
                 }
             }catch (Exception ex)
             {
+                response.IsSuccess = false;
                 response.Message = ex.Message;
             }
 

@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using CLINICAL.Application.Dto.Exam.Response;
 using CLINICAL.Application.UseCase.UseCase.Exam.Commands.CreateCommand;
+using CLINICAL.Application.UseCase.UseCase.Exam.Commands.UpdateCommand;
 using CLINICAL.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CLINICAL.Application.UseCase.Mappings
 {
@@ -18,6 +14,7 @@ namespace CLINICAL.Application.UseCase.Mappings
                 .ReverseMap();
 
             CreateMap<CreateExamCommand,Exam>();
+            CreateMap<UpdateExamCommand, Exam>();
         }
     }
 }

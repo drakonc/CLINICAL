@@ -37,6 +37,7 @@ namespace CLINICAL.Application.UseCase.UseCase.Exam.Queries.GetByIdQuery
 
             }catch(Exception ex)
             {
+                response.IsSuccess = false;
                 response.Message = ex.Message;
             }
 

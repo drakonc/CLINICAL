@@ -35,6 +35,7 @@ namespace CLINICAL.Application.UseCase.UseCase.Exam.Commands.CreateCommand
             }
             catch (Exception ex)
             {
+                response.IsSuccess = false;
                 response.Message = ex.Message;
             }
             return response;
