@@ -32,6 +32,11 @@ namespace CLINICAL.Application.UseCase.UseCase.Exam.Commands.CreateCommand
                     response.IsSuccess = true;
                     response.Message = GlobalMessages.MESSAGE_SAVE;
                 }
+                else
+                {
+                    response.IsSuccess = false;
+                    response.Message = GlobalMessages.MESSAGE_ERROR_SAVE;
+                }
             }
             catch (Exception ex)
             {

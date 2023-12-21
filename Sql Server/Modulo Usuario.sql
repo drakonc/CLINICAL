@@ -90,6 +90,23 @@ BEGIN
 END
 GO
 
+CREATE OR ALTER PROCEDURE dbo.uspPatientRegister --dbo.uspPatientById 1
+     @Names VARCHAR(100),
+     @LastName VARCHAR(50),
+     @MotherMaidenName VARCHAR(50),
+     @DocumentTypeId INT,
+     @DocumentNumber VARCHAR(25),
+     @Phone VARCHAR(15),
+     @TypeAgeId INT,
+     @Age INT,
+     @GenderId INT
+AS
+BEGIN
+	INSERT INTO Patients(Names,LastName,MotherMaidenName,DocumentTypeId,DocumentNumber,Phone,TypeAgeId,Age,GenderId)
+	VALUES(@Names,@LastName,@MotherMaidenName,@DocumentTypeId,@DocumentNumber,@Phone,@TypeAgeId,@Age,@GenderId)
+END
+GO
+
 select * from DocumentTypes
 select * from Genders
 select * from TypeAges

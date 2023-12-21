@@ -1,5 +1,6 @@
 using CLINICAL.Application.UseCase.Patient.Queries.GetAllQuery;
 using CLINICAL.Application.UseCase.Patient.Queries.GetByIdQuery;
+using CLINICAL.Application.UseCase.UseCase.Patient.Command.CreateCommand;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +29,13 @@ namespace CLINICAL.Api.Controllers
         {
             var response = await _medietor.Send(new GetByIdPatientQuery() { PatienId = parentId });
             return Ok(response);
+        }
+
+        [HttpPost("Register")]
+        public async Task<IActionResult> RegisterPatient([FromBody] CreatePatientCommand command)
+        {
+            var respuesta = await _medietor.Send(command);
+            return Ok(respuesta);
         }
 
     }

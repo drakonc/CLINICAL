@@ -23,6 +23,7 @@
         #region Patient
         public const string uspPatientList = "uspPatientList";
         public const string uspPatientById = "uspPatientById";
+        public const string uspPatientRegister = "uspPatientRegister";
         #endregion
     }
 }

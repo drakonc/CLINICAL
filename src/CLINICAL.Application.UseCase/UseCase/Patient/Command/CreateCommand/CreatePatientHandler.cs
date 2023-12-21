@@ -6,27 +6,27 @@ using CLINICAL.Utilities.HelperExtensions;
 using MediatR;
 using Entity = CLINICAL.Domain.Entities;
 
-namespace CLINICAL.Application.UseCase.UseCase.Analysis.Commands.CreateCommand
+namespace CLINICAL.Application.UseCase.UseCase.Patient.Command.CreateCommand
 {
-    public class CreateAnalysisHandler : IRequestHandler<CreateAnalysisCommand, BaseResponse<bool>>
+    internal class CreatePatientHandler : IRequestHandler<CreatePatientCommand, BaseResponse<bool>>
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public CreateAnalysisHandler(IUnitOfWork unitOfWork, IMapper mapper)
+        public CreatePatientHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
-        public async Task<BaseResponse<bool>> Handle(CreateAnalysisCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResponse<bool>> Handle(CreatePatientCommand request, CancellationToken cancellationToken)
         {
             var response = new BaseResponse<bool>();
             try
             {
-                var analysis = _mapper.Map<Entity.Analysis>(request);
-                var parameters = analysis.GetPropertiesWhithValues();
-                response.Data = await _unitOfWork.Analysis.ExecAsync(SP.uspAnalysisRegister, parameters);
+                var patient = _mapper.Map<Entity.Patient>(request);
+                var parameters = patient.GetPropertiesWhithValues();
+                response.Data = await _unitOfWork.Patient.ExecAsync(SP.uspPatientRegister, parameters);
                 if (response.Data)
                 {
                     response.IsSuccess = true;
@@ -37,14 +37,12 @@ namespace CLINICAL.Application.UseCase.UseCase.Analysis.Commands.CreateCommand
                     response.IsSuccess = false;
                     response.Message = GlobalMessages.MESSAGE_ERROR_SAVE;
                 }
-
             }
             catch (Exception ex)
             {
                 response.IsSuccess = false;
                 response.Message = ex.Message;
             }
-
             return response;
         }
     }
